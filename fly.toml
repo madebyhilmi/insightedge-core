@@ -8,7 +8,6 @@ primary_region = "sea"
 
 [build]
 image = "node:18-bullseye"
-include_dirs = ["dist"]
 cmd = "npm ci && npm run build"
 
 [deploy]
