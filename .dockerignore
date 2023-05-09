@@ -4,16 +4,16 @@
 node_modules
 
 # Logs
-**\logs
-**\*.log
-**\npm-debug.log*
-**\pnpm-debug.log*
-**\yarn-debug.log*
-**\yarn-error.log*
-**\lerna-debug.log*
+**/logs
+**/*.log
+**/npm-debug.log*
+**/pnpm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/lerna-debug.log*
 
 # OS
-**\.DS_Store
+**/.DS_Store
 
 # Tests
 coverage
@@ -21,29 +21,29 @@ coverage
 
 # IDEs and editors
 .idea
-**\.project
-**\.classpath
-**\.c9
-**\*.launch
-**\.settings
-**\*.sublime-workspace
+**/.project
+**/.classpath
+**/.c9
+**/*.launch
+**/.settings
+**/*.sublime-workspace
 
 # IDE - VSCode
-**\.vscode\*
-!**\.vscode\settings.json
-!**\.vscode\tasks.json
-!**\.vscode\launch.json
-!**\.vscode\extensions.json
+**/.vscode/*
+!**/.vscode/settings.json
+!**/.vscode/tasks.json
+!**/.vscode/launch.json
+!**/.vscode/extensions.json
 
 # flyctl launch added from .husky\_\.gitignore
-.husky\_\**\*
+.husky/_/**/*
 
 # flyctl launch added from .idea\.gitignore
 # Default ignored files
-.idea\shelf
-.idea\workspace.xml
+.idea/shelf
+.idea/workspace.xml
 # Editor-based HTTP Client requests
-.idea\httpRequests
+.idea/httpRequests
 
 # Environment Variables
 .env
