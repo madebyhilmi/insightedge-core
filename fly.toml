@@ -5,19 +5,34 @@
 
 app = "insightedge-core-prod"
 primary_region = "sea"
-
-[build]
-image = "node:18-bullseye"
-cmd = "npm ci && npm run build"
-
-[deploy]
-release_command = "npm ci && npm run start:prod"
-
-[http_service]
-  internal_port = 8080
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
 
 [env]
+PORT = "8080"
 NODE_ENV = "production"
+
+[experimental]
+allowed_public_ports = []
+
+
+[build]
+dockerfile = "Dockerfile"
+
+[[services]]
+internal_port = 8080
+processes = ["app"]
+protocol = "tcp"
+force_https = true
+auto_stop_machines = true
+auto_start_machines = true
+
+[[services.ports]]
+force_https = true
+handlers = ["http"]
+port = 80
+
+[[services.ports]]
+handlers = ["tls", "http"]
+port = 443
