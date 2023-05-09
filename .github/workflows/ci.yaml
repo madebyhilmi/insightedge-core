@@ -36,6 +36,7 @@ jobs:
 
   deploy:
     needs: build-and-test
+    if: github.event_name == 'push' # This job will only run for push events
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
