@@ -44,3 +44,6 @@ coverage
 .idea\workspace.xml
 # Editor-based HTTP Client requests
 .idea\httpRequests
+
+# Environment Variables
+.env

@@ -1,4 +1,4 @@
- FROM node:18-bullseye as builder
+FROM node:18-bullseye as builder
 
 ENV NODE_ENV build
 
