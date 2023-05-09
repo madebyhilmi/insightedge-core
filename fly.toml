@@ -12,6 +12,7 @@ processes = []
 [env]
 PORT = "8080"
 NODE_ENV = "production"
+APP_ENV = "production"
 
 [experimental]
 allowed_public_ports = []
