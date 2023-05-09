@@ -1,6 +1,6 @@
 # flyctl launch added from .gitignore
 # compiled output
-dist
+.git
 node_modules
 
 # Logs
