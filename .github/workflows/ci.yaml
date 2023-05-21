@@ -5,7 +5,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -33,3 +34,12 @@ jobs:
       run: npm run build
     - name: Run tests
       run: npm test
+
+  deploy:
+    needs: build-and-test
+    if: github.event_name == 'push' # This job will only run for push events
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only

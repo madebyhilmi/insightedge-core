@@ -1,0 +1,39 @@
+# fly.toml app configuration file generated for insightedge-core-prod on 2023-05-08T17:21:17-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "insightedge-core-prod"
+primary_region = "sea"
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[env]
+PORT = "8080"
+NODE_ENV = "production"
+APP_ENV = "production"
+
+[experimental]
+allowed_public_ports = []
+
+
+[build]
+dockerfile = "Dockerfile"
+
+[[services]]
+internal_port = 8080
+processes = ["app"]
+protocol = "tcp"
+force_https = true
+auto_stop_machines = true
+auto_start_machines = true
+
+[[services.ports]]
+force_https = true
+handlers = ["http"]
+port = 80
+
+[[services.ports]]
+handlers = ["tls", "http"]
+port = 443
