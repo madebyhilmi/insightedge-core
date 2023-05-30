@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { AllPlayersDto } from './dto/all-players.dto';
+import * as https from 'https';
+import * as fs from 'fs';
+import { AllPlayers } from '@insightedge/insightedge-common';
 
 @Injectable()
 export class GameDataService {
-  private allPlayersDto: AllPlayersDto;
+  private allPlayers: AllPlayers;
 
   async getGameData() {
     // This function can be called from anywhere in your code to get the latest AllPlayers data
-    if (this.allPlayersDto !== null) {
-      return this.allPlayersDto;
+    if (this.allPlayers !== null) {
+      return this.allPlayers;
     } else {
       throw new Error('No data available yet');
     }
@@ -17,18 +19,23 @@ export class GameDataService {
 
   async updateGameData() {
     try {
+      const riotGamesCert = fs.readFileSync('./configuration/riotgames.pem');
+      const httpsAgent = new https.Agent({
+        ca: riotGamesCert,
+      });
       const response = await axios.get(
-        'https://127.0.0.1:2999/liveclientdata/allgamedata'
+        'https://127.0.0.1:2999/liveclientdata/allgamedata',
+        { httpsAgent: httpsAgent }
       );
       const playerData = response.data.allPlayers;
-      this.allPlayersDto = this.transformToAllPlayersDto(playerData);
+      this.allPlayers = this.transformToAllPlayersDto(playerData);
     } catch (error) {
       console.error(`Error occurred while fetching game data: ${error}`);
       throw error;
     }
   }
 
-  transformToAllPlayersDto(playerData: Player[]): AllPlayersDto {
+  transformToAllPlayersDto(playerData: Player[]): AllPlayers {
     return {
       players: playerData.map(player => ({
         championName: player.championName,
