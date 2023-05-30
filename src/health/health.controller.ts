@@ -6,6 +6,7 @@ import {
   HttpHealthIndicator,
 } from '@nestjs/terminus';
 import { ConfigService } from '@nestjs/config';
+import { Constants } from '../config/constants';
 
 @Controller('health')
 export class HealthController {
@@ -33,7 +34,9 @@ export class HealthController {
             'https://na1.api.riotgames.com/lol/status/v4/platform-data',
             {
               headers: {
-                'X-Riot-Token': this.configService.get<string>('riotApiKey'),
+                'X-Riot-Token': this.configService.get<string>(
+                  Constants.riotApiKey
+                ),
               },
               timeout: 1000,
             }
