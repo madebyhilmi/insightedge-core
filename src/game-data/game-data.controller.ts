@@ -1,7 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { GameDataService } from './game-data.service';
-import { AllPlayers } from '@insightedge/insightedge-common';
-import { PlayerGold } from '@insightedge/insightedge-common/lib/shared/models/player-gold';
+import { AllPlayers, PlayerGold } from '@insightedge/insightedge-common';
 
 @Controller('game')
 export class GameDataController {
